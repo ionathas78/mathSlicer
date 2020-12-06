@@ -1,0 +1,12 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+#back {
+    height: 100vh;
+    width: 100vw;
+    background-image: url("assets/image/michael-dziedzic-aQYgUYwnCsM-unsplash-downsample.jpg");
+    background-repeat: no-repeat;
+    background-size: auto;
+}
