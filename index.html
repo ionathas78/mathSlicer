@@ -5,17 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/CSS" href="assets/css/style.css" />
     <title>mathSlicer</title>
-    <!-- <span>Photo by <a href="https://unsplash.com/@lazycreekimages?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Michael Dziedzic</a> on <a href="https://unsplash.com/s/photos/circuit?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span> -->
 </head>
 <body>
     <div id="wallpaper"></div>
 
-    <header>
+    <header id="main-header">
         <p>mathSlicer</p>
     </header>
-    <figure id="console">
 
-    </figure>
+    <section id="container">
+        <figure id="console">
+            <div class="console-header">
+                <div class="complexity">
+                    <p>
+                        <span class="complexity-title">COMPLEXITY:</span>
+                        <span class="complexity-button active" id="complexity-1" data-number="1">1</span>
+                        <span class="complexity-divider">//</span>
+                        <span class="complexity-button" id="complexity-2" data-number="2">2</span>
+                        <span class="complexity-divider">//</span>
+                        <span class="complexity-button" id="complexity-3" data-number="3">3</span>
+                        <span class="complexity-divider">//</span>
+                        <span class="complexity-button" id="complexity-4" data-number="4">4</span>
+                        <span class="complexity-divider">//</span>
+                        <span class="complexity-button" id="complexity-5" data-number="5">5</span>
+                        <span class="complexity-divider">>></span>
+                        <!--                        \
+                            <input type="number" name="complexity" id="complexity-input" min="1" max="5" value="1" />                        
+                        -->
+                    </p>
+                </div>
+            </div>
+
+            <div class="console-viewport">
+                <div id="row-top">
+
+                </div>
+                <div id="row-bottom">
+
+                </div>
+                <div id="row-separator">
+
+                </div>
+                <div id="row-total">
+                    
+                </div>
+            </div>
+
+            <div class="console-interface">
+                <div class="console-keypad">
+                    <div class="interface-button" id="interface-1" data-number="1">
+                        <p>1</p>
+                    </div>
+                    <div class="interface-button" id="interface-2" data-number="2">
+                        <p>2</p>
+                    </div>
+                    <div class="interface-button" id="interface-3" data-number="3">
+                        <p>3</p>
+                    </div>
+                    <div class="interface-button" id="interface-4" data-number="4">
+                        <p>4</p>
+                    </div>
+                    <div class="interface-button" id="interface-5" data-number="5">
+                        <p>5</p>
+                    </div>
+                    <div class="interface-button" id="interface-6" data-number="6">
+                        <p>6</p>
+                    </div>
+                    <div class="interface-button" id="interface-7" data-number="7">
+                        <p>7</p>
+                    </div>
+                    <div class="interface-button" id="interface-8" data-number="8">
+                        <p>8</p>
+                    </div>
+                    <div class="interface-button" id="interface-9" data-number="9">
+                        <p>9</p>
+                    </div>
+                    <div class="interface-button" id="interface-0" data-number="0">
+                        <p>0</p>
+                    </div>
+                    <div class="interface-button" id="interface-C" data-number="C">
+                        <p>C</p>
+                    </div>
+                    <div class="interface-button" id="interface-E" data-number="E">
+                        <p>↵</p>
+                    </div>
+                </div>
+            </div>
+        </figure>
+    </section>
+
+    <footer id="main-footer">
+        <p>
+            <span>Background photo by <a href="https://unsplash.com/@lazycreekimages?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Michael Dziedzic</a> on <a href="https://unsplash.com/s/photos/circuit?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+        </p>    
+    </footer>
 
     <script type="text/JavaScript" src="assets/js/logic.js"></script>
 </body>
