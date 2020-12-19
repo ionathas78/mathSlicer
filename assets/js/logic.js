@@ -104,6 +104,77 @@ function createProblem(complexityLevel) {
     _operation = actualOperand;
 
     console.log(_topNumber.toString() + " " + _operation + " " + _bottomNumber.toString() + " == " + _resultTotal.toString());
+    displayProblem(_topNumber, _bottomNumber, _operation, _resultTotal);
+}
+
+function displayProblem(x, y, operand, solution) {
+    let xTag = [
+        document.getElementById("top0"),
+        document.getElementById("top1"),
+        document.getElementById("top2"),
+        document.getElementById("top3"),
+        document.getElementById("top4")
+    ]
+    let yTag = [
+        document.getElementById("btm0"),
+        document.getElementById("btm1"),
+        document.getElementById("btm2"),
+        document.getElementById("btm3"),
+        document.getElementById("btm4")
+    ]
+    let solTag = [
+        document.getElementById("sol0"),
+        document.getElementById("sol1"),
+        document.getElementById("sol2"),
+        document.getElementById("sol3"),
+        document.getElementById("sol4"),
+        document.getElementById("sol5")
+    ]
+    let opTag = document.getElementById("op");
+
+    //          Clear Tags
+    xTag.forEach(tag => tag.textContent = "");
+    yTag.forEach(tag => tag.textContent = "");
+    solTag.forEach(tag => tag.textContent = "");
+    opTag.textContent = "";
+
+    //          Set Tags
+    let xString = x.toString();
+    let xTagIdx = xTag.length - 1;
+    if (xString.length > xTag.length) {
+        xString = xString.substr(xString.length - xTag.length);
+        x = parseInt(xString);
+    }
+    for (let xIdx = xString.length - 1; xIdx > -1; xIdx--) {
+        xTag[xTagIdx].textContent = xString[xIdx];
+        xTagIdx--;
+    }
+
+    let yString = y.toString();
+    let yTagIdx = yTag.length - 1;
+    if (yString.length > yTag.length) {
+        yString = yString.substr(yString.length - yTag.length);
+        y = parseInt(yString);
+    }
+    for (let yIdx = yString.length - 1; yIdx > -1; yIdx--) {
+        yTag[yTagIdx].textContent = yString[yIdx];
+        yTagIdx--;
+    }
+
+/*     
+    let solString = solution.toString();
+    let solTagIdx = solTag.length - 1;
+    if (solString.length > solTag.length) {
+        solString = solString.substr(solString.length - solTag.length);
+        solution = parseInt(solString);
+    }
+    for (let solIdx = solString.length - 1; solIdx > -1; solIdx--) {
+        solTag[solTagIdx].textContent = solString[solIdx];
+        solTagIdx--;
+    }
+ */
+
+    opTag.textContent = operand;
 }
 
 function addInput(newInput) {

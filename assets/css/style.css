@@ -88,6 +88,12 @@
     width: 25px;
 }
 
+#console-viewport {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
 .complexity-title {
     color: white;
     font-weight: bold;
@@ -177,6 +183,38 @@
 .interface-button:active {
     background-color: lightgreen;
     color: #333;
+}
+
+.problem {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    width: 150px;
+    height: 25px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: yellow;
+    margin: 0 3px;
+}
+
+.problem-column {
+    min-width: 25px;
+    margin: 0;
+    text-align: center;
+}
+
+.problem-line {
+    width: 150px;
+    border-bottom: solid 1px yellow;
+}
+
+#problem-viewport {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
 }
 
 #wallpaper {
