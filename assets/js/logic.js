@@ -1,65 +1,115 @@
-var _complexityBtns = document.querySelectorAll(".complexity-button");
-var _complexityBtn1 = document.getElementById("complexity-1");
-var _complexityBtn2 = document.getElementById("complexity-2");
-var _complexityBtn3 = document.getElementById("complexity-3");
-var _complexityBtn4 = document.getElementById("complexity-4");
-var _complexityBtn5 = document.getElementById("complexity-5");
-var _interfaceBtns = document.querySelectorAll(".interface-button");
-var _interfaceBtn0 = document.getElementById("interface-0");
-var _interfaceBtn1 = document.getElementById("interface-1");
-var _interfaceBtn2 = document.getElementById("interface-2");
-var _interfaceBtn3 = document.getElementById("interface-3");
-var _interfaceBtn4 = document.getElementById("interface-4");
-var _interfaceBtn5 = document.getElementById("interface-5");
-var _interfaceBtn6 = document.getElementById("interface-6");
-var _interfaceBtn7 = document.getElementById("interface-7");
-var _interfaceBtn8 = document.getElementById("interface-8");
-var _interfaceBtn9 = document.getElementById("interface-9");
-var _interfaceBtnC = document.getElementById("interface-C");
-var _interfaceBtnE = document.getElementById("interface-E");
+const _complexityBtns = document.querySelectorAll(".complexity-button");
+const _complexityBtn1 = document.getElementById("complexity-1");
+const _complexityBtn2 = document.getElementById("complexity-2");
+const _complexityBtn3 = document.getElementById("complexity-3");
+const _complexityBtn4 = document.getElementById("complexity-4");
+const _complexityBtn5 = document.getElementById("complexity-5");
+const _interfaceBtns = document.querySelectorAll(".interface-button");
+const _interfaceBtn0 = document.getElementById("interface-0");
+const _interfaceBtn1 = document.getElementById("interface-1");
+const _interfaceBtn2 = document.getElementById("interface-2");
+const _interfaceBtn3 = document.getElementById("interface-3");
+const _interfaceBtn4 = document.getElementById("interface-4");
+const _interfaceBtn5 = document.getElementById("interface-5");
+const _interfaceBtn6 = document.getElementById("interface-6");
+const _interfaceBtn7 = document.getElementById("interface-7");
+const _interfaceBtn8 = document.getElementById("interface-8");
+const _interfaceBtn9 = document.getElementById("interface-9");
+const _interfaceBtnC = document.getElementById("interface-C");
+const _interfaceBtnE = document.getElementById("interface-E");
+const _resultBanner = document.getElementById("result-banner");
+const _resultTag = document.getElementById("result-tag");
+
+const _STATUS_SUCCESS = 1;
+const _STATUS_INPROGRESS = 0;
+const _STATUS_FAILURE = -1;
 
 var _complexityLevel = 1;
 var _topNumber = 0;
 var _bottomNumber = 0;
 var _resultTotal = 0;
 var _operation = "";
-var _inputs = [-1, -1, -1, -1, -1];
-var _inputDigit = 0;
+var _inputs = [];
+var _status = _STATUS_INPROGRESS;                       
 
+setupComplexity();
 
-document.addEventListener("click", event => {
-    let tagValue = event.target.dataset.number;
-    let tagId = event.target.id;
-    let tagType = tagId.substring(0, tagId.indexOf("-"));
-
-    switch (tagType) {
-        case "complexity":
-            event.preventDefault();
-            handleComplexityButton(event.target, tagValue);
-            break;
-        case "interface":
-            event.preventDefault();
-            handleInterfaceButton(event.target, tagValue);
-            break;
-        default:
-    }
+_complexityBtns.forEach(btn => {
+    btn.addEventListener("click", event => {
+        handleComplexityButton(event);
+    });    
+});
+_interfaceBtns.forEach(btn => {
+    btn.addEventListener("click", event => {
+        handleInterfaceButton(event);
+    });
+});
+document.addEventListener("keyup", event => {
+    handleInterfaceKeypress(event);
 });
 
-function handleComplexityButton(button, value) {
+function handleComplexityButton(event) {
+    let tagValue = event.target.dataset.number;
+
     _complexityBtns.forEach(tag => {
         tag.className = "complexity-button";
     });
-    button.className = "complexity-button active";
-    _complexityLevel = parseInt(value);
+    event.target.className = "complexity-button active";
+    _complexityLevel = parseInt(tagValue);
 
     createProblem(_complexityLevel);
 }
 
-function handleInterfaceButton(button, value) {
-    console.log(button, value);
+function handleInterfaceButton(event) {
+    let tagValue = event.target.dataset.number;
+
+    if ((_status != _STATUS_INPROGRESS) || !tagValue) {
+        return;
+    }
+
+    routeInterfaceCall(tagValue);
+}
+
+function handleInterfaceKeypress(event) {
+    let keyValue = event.key;
+    console.log(keyValue);
+
+    if ((_status != _STATUS_INPROGRESS) || !keyValue) {
+        return;
+    }
+
+    routeInterfaceCall(keyValue);
+}
+
+function routeInterfaceCall(inputValue) {
+    if (inputValue.toUpperCase() == "C") {
+        clearInput(_inputs);
+
+    } else if ((inputValue.toUpperCase() == "E") || (inputValue == "Enter")) {
+        enterInput(_inputs, _resultTotal);
+
+    } else if ((inputValue == "Backspace")) {
+        deleteInput(_inputs);
+
+    } else if (!isNaN(inputValue)) {
+        addInput(_inputs, inputValue, _complexityLevel + 1);
+    }
+}
+
+function setupComplexity() {
+    _complexityBtns.forEach(tag => {
+        tag.className = "complexity-button";
+    });
+    _complexityBtn1.className = "complexity-button active";
+    _complexityLevel = 1;
+
+    createProblem(_complexityLevel);
 }
 
 function createProblem(complexityLevel) {
+    clearInput();
+    _status = _STATUS_INPROGRESS;
+
     let topNo = Math.floor(Math.random() * 8) + 2;         // Because we want the top number to be larger than the bottom
     let bottomNo = Math.floor(Math.random() * topNo);
     let operRand = Math.random();
@@ -104,10 +154,14 @@ function createProblem(complexityLevel) {
     _operation = actualOperand;
 
     console.log(_topNumber.toString() + " " + _operation + " " + _bottomNumber.toString() + " == " + _resultTotal.toString());
-    displayProblem(_topNumber, _bottomNumber, _operation, _resultTotal);
+    displayProblem(_topNumber, _bottomNumber, _operation);
 }
 
-function displayProblem(x, y, operand, solution) {
+function displayProblem(x, y, operand) {
+    _resultBanner.style.display = "none";
+    _resultBanner.className = "";
+    _resultTag.textContent = "";
+
     let xTag = [
         document.getElementById("top0"),
         document.getElementById("top1"),
@@ -161,44 +215,74 @@ function displayProblem(x, y, operand, solution) {
         yTagIdx--;
     }
 
-/*     
-    let solString = solution.toString();
-    let solTagIdx = solTag.length - 1;
-    if (solString.length > solTag.length) {
-        solString = solString.substr(solString.length - solTag.length);
-        solution = parseInt(solString);
-    }
-    for (let solIdx = solString.length - 1; solIdx > -1; solIdx--) {
-        solTag[solTagIdx].textContent = solString[solIdx];
-        solTagIdx--;
-    }
- */
-
     opTag.textContent = operand;
 }
 
-function addInput(newInput) {
-
+function addInput(inputArray, newInput, maxDigits) {
+    if (inputArray.length < maxDigits) {
+        inputArray.push(newInput);
+        displayInput(inputArray);
+    }
 }
 
 function clearInput() {
-    _inputs = [-1, -1, -1, -1, -1];
+    _inputs = [];
+    displayInput(_inputs);
 }
 
-function displayInput(inputs) {
-
+function deleteInput(inputArray) {
+    inputArray.pop();
+    displayInput(inputArray);
 }
 
-function getInput() {
+function displayInput(inputArray) {
+    let solTag = [
+        document.getElementById("sol0"),
+        document.getElementById("sol1"),
+        document.getElementById("sol2"),
+        document.getElementById("sol3"),
+        document.getElementById("sol4"),
+        document.getElementById("sol5")
+    ]
+    let arrayLength = inputArray.length;
+    let tagArrayLength = solTag.length;
+
+    solTag.forEach(tag => {
+        tag.textContent = "";
+    });
+
+    for (let i = 1; i <= arrayLength; i++) {
+        solTag[tagArrayLength - i].textContent = inputArray[arrayLength - i];
+    }
+}
+
+function enterInput(inputArray, solution) {
+    let inputValue = getInput(inputArray);
+
+    if (inputValue == solution) {
+        _status = _STATUS_SUCCESS;
+        _resultTag.textContent = "SUCCESS!";
+        _resultBanner.className = "success";
+        _resultBanner.style.display = "flex";
+
+    } else {
+        _status = _STATUS_FAILURE;
+        _resultTag.textContent = "FAILURE!";
+        _resultBanner.className = "failure";
+        _resultBanner.style.display = "flex";
+    }
+}
+
+function getInput(inputArray) {
     let returnInteger = -1;
     let compileString = "";
-    for (let i = 0; i <= _maxDigit; i++) {
-        if (_inputs[i] > -1) {
-            compileString += _inputs[i].toString();
-        }
+
+    for (let i = 0; i < inputArray.length; i++) {
+        compileString += inputArray[i].toString();
     }
     if (compileString !== "") {
         returnInteger = parseInt(compileString);
     }
+
     return returnInteger;
 }
