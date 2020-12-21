@@ -70,6 +70,10 @@
     width: 350px;
 }
 
+.click-through {
+    pointer-events: none;
+}
+
 .console-header {
     position: absolute;
     top: 0;
