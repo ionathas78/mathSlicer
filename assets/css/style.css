@@ -59,7 +59,7 @@
 
 #console {
     position: relative;
-    top: 0;
+    top: -25px;
     left: 0;
     background-color: #333;
     border-style: groove;
@@ -90,6 +90,35 @@
 
 .console-header input {
     width: 25px;
+}
+
+.console-timer {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    height: 36px;
+    width: 24px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.console-timer p {
+    color: white;
+    font-family: monospace;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.console-timer p.warning {
+    color: gold;
+    font-style: italic;
+}
+
+.console-timer p.danger {
+    color: red;
+    text-decoration: underline;
 }
 
 #console-viewport {

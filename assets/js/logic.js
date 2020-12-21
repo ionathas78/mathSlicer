@@ -19,10 +19,13 @@ const _interfaceBtnC = document.getElementById("interface-C");
 const _interfaceBtnE = document.getElementById("interface-E");
 const _resultBanner = document.getElementById("result-banner");
 const _resultTag = document.getElementById("result-tag");
+const _timerTag = document.getElementById("timer-counter");
 
 const _STATUS_SUCCESS = 1;
 const _STATUS_INPROGRESS = 0;
 const _STATUS_FAILURE = -1;
+const _TIMER_INTERVAL = 1000;
+const _TIMER_LENGTHS = [10, 30, 60, 90, 150];
 
 var _complexityLevel = 1;
 var _topNumber = 0;
@@ -30,6 +33,9 @@ var _bottomNumber = 0;
 var _resultTotal = 0;
 var _operation = "";
 var _inputs = [];
+var _timer = null;
+var _timerCounter = 0;
+var _timerLength = 0;
 var _status = _STATUS_INPROGRESS;                       
 
 setupComplexity();
@@ -106,6 +112,48 @@ function setupComplexity() {
     createProblem(_complexityLevel);
 }
 
+function setupCounter(timeoutValue) {
+    _timer = window.setInterval(handleInterval, _TIMER_INTERVAL);
+    _timerLength = timeoutValue + 1;
+}
+
+function clearCounter() {
+    window.clearInterval(_timer);
+    _timerCounter = 0;
+    _timerTag.textContent = "";
+    _timerTag.className = "";
+}
+
+function handleInterval() {
+    _timerCounter++;
+
+    if (_timerCounter > _timerLength) {
+        clearCounter();
+        handleTimerOut();
+    } else {
+        if (_timerCounter == Math.floor(_timerLength * 0.5)) {
+            _timerTag.className = "warning";
+        } else if (_timerCounter == Math.floor(_timerLength * 0.75)) {
+            _timerTag.className = "danger";
+        }
+
+        displayCounter();
+    }
+}
+
+function displayCounter() {
+    let counterValue = _timerLength - _timerCounter;
+
+    _timerTag.textContent = counterValue;
+}
+
+function handleTimerOut() {
+    _timerTag.textContent = "";
+    _resultTag.textContent = "TIME OUT!";
+    _resultBanner.className = "failure";
+    _resultBanner.style.display = "flex";
+}
+
 function createProblem(complexityLevel) {
     clearInput();
     _status = _STATUS_INPROGRESS;
@@ -118,6 +166,7 @@ function createProblem(complexityLevel) {
     let operandIndex = Math.floor(operRand * totalOperandi);
     let solution = 0;
     let actualOperand = operandList[operandIndex];
+    let timerLength = _TIMER_LENGTHS[complexityLevel - 1];
 
     for (let i = 1; i < _complexityLevel; i++) {
         //  We start with the first digit filled, so i == 1
@@ -153,8 +202,10 @@ function createProblem(complexityLevel) {
     _resultTotal = solution;
     _operation = actualOperand;
 
-    console.log(_topNumber.toString() + " " + _operation + " " + _bottomNumber.toString() + " == " + _resultTotal.toString());
+    // console.log(_topNumber.toString() + " " + _operation + " " + _bottomNumber.toString() + " == " + _resultTotal.toString());
     displayProblem(_topNumber, _bottomNumber, _operation);
+
+    setupCounter(timerLength);
 }
 
 function displayProblem(x, y, operand) {
@@ -257,6 +308,8 @@ function displayInput(inputArray) {
 }
 
 function enterInput(inputArray, solution) {
+    clearCounter();
+
     let inputValue = getInput(inputArray);
 
     if (inputValue == solution) {
