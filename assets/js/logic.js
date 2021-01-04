@@ -155,6 +155,7 @@ function handleTimerOut() {
 }
 
 function createProblem(complexityLevel) {
+    clearCounter();
     clearInput();
     _status = _STATUS_INPROGRESS;
 
