@@ -36,7 +36,7 @@ THEN THE APP MAINTAINS ITS PRESENTATION AND UTILITY
 
 
 ## Graphic
-![Project Image 0]('mathSlicer/screenshots/mathSlicer Project Image.jpg')
+![Project Image 0](screenshots/mathSlicer_Project_Image.jpg)
 
 ## Table of Contents
 * [Technologies](#Technologies)
@@ -61,10 +61,10 @@ The page has an assets folder with the CSS and JS files, in addition to the imag
 Clicking the Complexity Numbers at the top of the interface changes the level, resets the current problem, and restarts the timer. Clicking or, on a touchscreen device, tapping the keys in the bottom half of the interface enters digits in the answer field, which updates dynamically. The 'C' key clears the field, while the Enter key finalizes the answer. If you prefer, you can also use the keyboard to enter your answer: the number keys, 'C', and 'E' or Enter keys.
 If you enter an incorrect answer, a Failure notification flashes on the viewscreen. If you let the timer run out before you enter an answer, a Timeout notification flashes on the viewport. If you enter the correct solution before the timer runs out, a Success notification appears.
 
-![Project Usage Image 0](screenshots/mathSlicer Usage Screenshot.jpg)
-![Project Usage Image 1](screenshots/mathSlicer Timeout Screenshot.jpg)
-![Project Usage Image 2](screenshots/mathSlicer Failure Screenshot.jpg)
-![Project Usage Image 3](screenshots/mathSlicer Success Screenshot.jpg)
+![Project Usage Image 0](screenshots/mathSlicer_Usage_Screenshot.jpg)
+![Project Usage Image 1](screenshots/mathSlicer_Timeout_Screenshot.jpg)
+![Project Usage Image 2](screenshots/mathSlicer_Failure_Screenshot.jpg)
+![Project Usage Image 3](screenshots/mathSlicer_Success_Screenshot.jpg)
 
 ## Project Status
 Finished
