@@ -36,7 +36,7 @@ THEN THE APP MAINTAINS ITS PRESENTATION AND UTILITY
 
 
 ## Graphic
-![Project Image 0]('screenshots/mathSlicer Project Image.jpg')
+![Project Image 0]('/screenshots/mathSlicer Project Image.jpg')
 
 ## Table of Contents
 * [Technologies](#Technologies)
