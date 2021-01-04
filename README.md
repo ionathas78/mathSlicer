@@ -43,7 +43,6 @@ THEN THE APP MAINTAINS ITS PRESENTATION AND UTILITY
 * [Getting Started](#Getting)
 * [Usage](#Usage)
 * [Project Status](#Project)
-* [Frequently Asked Questions](#FAQ)
 * [Questions](#Additional)
 * [Contributing](#Contributing)
 * [License](#License)
